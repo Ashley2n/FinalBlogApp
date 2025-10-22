@@ -5062,32 +5062,39 @@
     ]
   },
   "packageFolders": {
-    "/Users/cadenepp/.nuget/packages/": {}
+    "C:\\Users\\awind\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/cadenepp/C#2/FinalBlogApp/Blog.Infrastructure/Blog.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\awind\\Documents\\Advance C#\\Projects\\BlogApp\\Blog.Infrastructure\\Blog.Infrastructure.csproj",
       "projectName": "Blog.Infrastructure",
-      "projectPath": "/Users/cadenepp/C#2/FinalBlogApp/Blog.Infrastructure/Blog.Infrastructure.csproj",
-      "packagesPath": "/Users/cadenepp/.nuget/packages/",
-      "outputPath": "/Users/cadenepp/C#2/FinalBlogApp/Blog.Infrastructure/obj/",
+      "projectPath": "C:\\Users\\awind\\Documents\\Advance C#\\Projects\\BlogApp\\Blog.Infrastructure\\Blog.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\awind\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\awind\\Documents\\Advance C#\\Projects\\BlogApp\\Blog.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/cadenepp/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\awind\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\MicroFocus.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Micro Focus\\Visual COBOL\\NuGetPackages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/cadenepp/C#2/FinalBlogApp/Blog.Domain/Blog.Domain.csproj": {
-              "projectPath": "/Users/cadenepp/C#2/FinalBlogApp/Blog.Domain/Blog.Domain.csproj"
+            "C:\\Users\\awind\\Documents\\Advance C#\\Projects\\BlogApp\\Blog.Domain\\Blog.Domain.csproj": {
+              "projectPath": "C:\\Users\\awind\\Documents\\Advance C#\\Projects\\BlogApp\\Blog.Domain\\Blog.Domain.csproj"
             }
           }
         }
@@ -5149,7 +5156,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
