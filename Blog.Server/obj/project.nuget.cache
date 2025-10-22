@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ISSQjkE1MMg=",
+  "dgSpecHash": "hqV4bdKsBNM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\awind\\Documents\\Advance C#\\Projects\\BlogApp\\Blog.Server\\Blog.Server.csproj",
+  "projectFilePath": "/Users/cadenepp/C#2/FinalBlogApp/Blog.Server/Blog.Server.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\awind\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
-    "C:\\Users\\awind\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+    "/Users/cadenepp/.nuget/packages/microsoft.aspnetcore.openapi/9.0.8/microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "/Users/cadenepp/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
   ],
   "logs": []
 }
