@@ -5,9 +5,9 @@ namespace Blog.Application.Services;
 
 public sealed class UserService : IUserService
 {
-    private readonly IUserService _userService;
+    private readonly IUserRepository _userService;
 
-    public UserService(IUserService userService)
+    public UserService(IUserRepository userService)
     {
         _userService = userService;
     }

@@ -4,10 +4,10 @@ namespace Blog.Application.Services;
 
 public sealed class BlogService : IBlogService
 {
-    private readonly IBlogServiceRepository _blogService;
+    private readonly IBlogRepository _blogService;
     // using the repository
     
-    public BlogService(IBlogServiceRepository blogService)
+    public BlogService(IBlogRepository blogService)
     {
         _blogService = blogService;
     }
