@@ -1,6 +1,5 @@
 ﻿using Blog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Blog.Infrastructure.Data;
 

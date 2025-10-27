@@ -10,6 +10,7 @@ builder.Services.AddOpenApi();
 // di containers
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IBlogPostRepository, BlogRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 var app = builder.Build();
