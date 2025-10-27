@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Blog.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Blog.Infrastructure.Data;
 
@@ -26,7 +28,19 @@ public class AppDbContext: DbContext
             e.HasKey(x => x.Id);
             e.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
-            e.Property(x => x.Name)
+            e.Property(x => x.FirstName)
+                .IsRequired();
+            e.Property(x => x.LastName)
+                .IsRequired();
+            e.Property(x => x.Email)
+                .IsRequired();
+            e.Property(x => x.Password)
+                .IsRequired();
+            e.Property(x => x.AccountCreationDate)
+                .IsRequired();
+            e.Property(x => x.PhoneNumber)
+                .IsRequired();
+            e.Property(x => x.ProfileImage)
                 .IsRequired();
         });
     }
