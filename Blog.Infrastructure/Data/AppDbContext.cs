@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Blog.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Infrastructure.Data;
 
