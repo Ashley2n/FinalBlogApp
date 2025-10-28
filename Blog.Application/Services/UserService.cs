@@ -1,50 +1,59 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Blog.Application.Interfaces;
+using Blog.Domain.Entities;
+using Blog.Infrastructure.Repositories;
 
 namespace Blog.Application.Services;
 
 public sealed class UserService : IUserService
 {
-    private readonly IUserRepository _userService;
+    private readonly UserRepository _userService;
 
-    public UserService(IUserRepository userService)
+    public UserService(UserRepository userService)
     {
         _userService = userService;
     }
 
-    public async Task<UserEntityDto> CreateUserAsync(string firstName, string lastName, DateTime accountCreationDate,
-        EmailAddressAttribute email,
-        PhoneAttribute phone, CancellationToken ct = default)
+    public async Task<User> CreateUserAsync(CreateUserDto dto, CancellationToken ct = default)
     {
-        var user = new UserEntity
+        var user = new User
         {
-            FirstName = firstName,
-            LastName = lastName,
-            AccountCreationDate = accountCreationDate,
-            Email = email,
-            Phone = phone
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            PhoneNumber = dto.PhoneNumber,
+            ProfileImage = dto.ProfileImage,
         };
-        await _userService.Add(user, ct);
+        await _userService.AddAsync(user, ct);
         return user;
 
     }
 
-    //public async Task<UserEntityDto> UpdateUserAsync(CancellationToken ct = default)
-    //    {
-    //        
-    //    }
+    public async Task<User> UpdateUserAsync(UpdateUserDTO dto, CancellationToken ct = default)
+        {
+            var user = await _userService.GetById(dto.Id, ct);
 
-    public async Task<UserEntityDto> DeleteUserAsync(CancellationToken ct = default) 
+            user.FirstName = dto.FirstName;
+            user.LastName = dto.LastName;
+            user.Email = dto.Email;
+            user.PhoneNumber = dto.PhoneNumber;
+            user.ProfileImage = dto.ProfileImage;
+            
+            await _userService.UpdateAsync(user, ct);
+            return user;
+        }
+
+    public async Task<bool> DeleteUserAsync(UserDro dto, CancellationToken ct = default)
     {
-        
+        var entity = await _userService.GetById(dto.Id, ct);
+        if (entity == null) return false;
+        await _userService.DeleteAsync(entity, ct);
+        return true;
     }
 
-    public Task<UserEntityDto> GetUserById(int userId, CancellationToken ct = default) =>
-        _userService.GetByIdAsync(userId, ct);
+    public async Task<User> GetUserById(UserDro dto, CancellationToken ct = default) =>
+        await _userService.GetById(dto, ct);
 
-    public async Task<List<UserEntityDto>> GetAllUsersAsync(CancellationToken ct = default)
-    {
-        
-    }
-
+    public async Task<List<User>> GetAllUsers(CancellationToken ct = default) =>
+        await _userService.GetAll(ct);
 }

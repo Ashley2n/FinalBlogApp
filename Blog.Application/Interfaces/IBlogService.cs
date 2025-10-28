@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Blog.Domain.Entities;
 
 namespace Blog.Application.Interfaces;
 
 public interface IBlogService
 {
-    Task<BlogPostDTO> CreateBlogPostAsync(string title, string content, CancellationToken ct = default);
-    Task<BlogPostDTO> UpdateBlogPostAsync(CancellationToken ct = default);
-    Task<BlogPostDTO> DeleteBlogPostAsync(CancellationToken ct = default);
-    Task<BlogPostDTO> GetBlogPostByIdAsync(int blogPostId, CancellationToken ct = default);
-    Task<List<BlogPostDTO>> GetAllBlogPostsAsync(CancellationToken ct = default);
+    Task<BlogPost> CreateBlogPostAsync(CreateBlogPostDto dto, CancellationToken ct = default);
+    Task<BlogPost> UpdateBlogPostAsync(UpdateBlogPdtDto dto, CancellationToken ct = default);
+    Task<bool> DeleteBlogPostAsync(BlogPostDto dto, CancellationToken ct = default);
+    Task<BlogPost> GetBlogPostByIdAsync(int blogPostId, CancellationToken ct = default);
+    Task<List<BlogPost>> GetAllBlogPostsAsync(CancellationToken ct = default);
     
 }
