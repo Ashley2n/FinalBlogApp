@@ -1,0 +1,24 @@
+@page "/signout"
+@inject IUserService UserService
+
+<h3>Sign Out</h3>
+
+@if (isSignedOut)
+{
+    <p class="text-success">You have been signed out.</p>
+    <NavLink class="btn btn-outline-primary" href="/">Return to Dashboard</NavLink>
+}
+else
+{
+    <p>Signing out...</p>
+}
+
+@code {
+    private bool isSignedOut = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UserService.SignOutAsync();
+        isSignedOut = true;
+    }
+}
