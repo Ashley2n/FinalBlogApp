@@ -1,4 +1,5 @@
-﻿using Blog.Application.Interfaces;
+﻿using Blog.Application.DTO.BlogPosts;
+using Blog.Application.Interfaces;
 using Blog.Domain.Entities;
 using Blog.Infrastructure.Repositories;
 
@@ -26,7 +27,7 @@ public sealed class BlogService : IBlogService
         return blog;
     }
 
-    public async Task<BlogPost> UpdateBlogPostAsync(UpdateBlogPdtDto dto, CancellationToken ct = default)
+    public async Task<BlogPost> UpdateBlogPostAsync(UpdateBlogPostDto dto, CancellationToken ct = default)
     {
         var blog = await _blogService.GetById(dto.Id, ct);
 
@@ -47,8 +48,8 @@ public sealed class BlogService : IBlogService
         return true;
     }
 
-    public async Task<BlogPost> GetBlogPostByIdAsync(BlogPostDto dto, CancellationToken ct = default) =>
-            await _blogService.GetById(dto.Id, ct);
+    public async Task<BlogPost> GetBlogPostByIdAsync(int id, CancellationToken ct = default) =>
+            await _blogService.GetById(id, ct);
 
     public async Task<List<BlogPost>> GetAllBlogPostsAsync(CancellationToken ct = default) =>
         await _blogService.GetAll(ct);

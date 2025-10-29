@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Blog.Application.DTO.Users;
 using Blog.Application.Interfaces;
 using Blog.Domain.Entities;
 using Blog.Infrastructure.Repositories;
+
 
 namespace Blog.Application.Services;
 
@@ -21,15 +23,15 @@ public sealed class UserService : IUserService
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             Email = dto.Email,
-            PhoneNumber = dto.PhoneNumber,
-            ProfileImage = dto.ProfileImage,
+            PhoneNumber = dto.phoneNumber,
+            ProfileImage = dto.profileImage,
         };
         await _userService.AddAsync(user, ct);
         return user;
 
     }
 
-    public async Task<User> UpdateUserAsync(UpdateUserDTO dto, CancellationToken ct = default)
+    public async Task<User> UpdateUserAsync(UpdateUserDto dto, CancellationToken ct = default)
         {
             var user = await _userService.GetById(dto.Id, ct);
 
@@ -43,7 +45,7 @@ public sealed class UserService : IUserService
             return user;
         }
 
-    public async Task<bool> DeleteUserAsync(UserDro dto, CancellationToken ct = default)
+    public async Task<bool> DeleteUserAsync(UserDto dto, CancellationToken ct = default)
     {
         var entity = await _userService.GetById(dto.Id, ct);
         if (entity == null) return false;
@@ -51,8 +53,8 @@ public sealed class UserService : IUserService
         return true;
     }
 
-    public async Task<User> GetUserById(UserDro dto, CancellationToken ct = default) =>
-        await _userService.GetById(dto, ct);
+    public async Task<User> GetUserById(int id, CancellationToken ct = default) =>
+        await _userService.GetById(id, ct);
 
     public async Task<List<User>> GetAllUsers(CancellationToken ct = default) =>
         await _userService.GetAll(ct);
