@@ -1,0 +1,33 @@
+
+
+@page "/posts"
+@inject BlogService BlogService
+
+<h3>Blog Posts</h3>
+
+@if (posts == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+<ul>
+    @foreach (var post in posts)
+    {
+    <li>
+        <strong>@post.Title</strong> by @post.Author <br />
+                Created: @post.Created.ToShortDateString()
+            </li>
+        }
+    
+</ul>
+}
+
+@code {
+List<OrderSummaryDto>? posts;
+
+protected override async Task OnInitializedAsync()
+{
+posts = await BlogService.GetPostsAsync();
+}
+}

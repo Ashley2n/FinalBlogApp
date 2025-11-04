@@ -1,0 +1,22 @@
+@page "/create"
+
+@inject BlogService BlogService
+
+<h3>Create Blog Post</h3>
+
+<EditForm Model="@newPost" OnValidSubmit="HandleSubmit">
+    <InputText @bind-Value="newPost.Author" placeholder="Author" />
+    <InputText @bind-Value="newPost.Title" placeholder="Title" />
+    <InputTextArea @bind-Value="newPost.Content" placeholder="Content" />
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    CreateOrderRequest newPost = new();
+
+    async Task HandleSubmit()
+    {
+        newPost.Created = DateTime.Now;
+        await BlogService.CreatePostAsync(newPost);
+    }
+}

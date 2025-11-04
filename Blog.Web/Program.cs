@@ -29,6 +29,7 @@ builder.Services.AddScoped<IBlogService, BlogService>();
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddScoped<BlogService>();
 
 var app = builder.Build();
 
