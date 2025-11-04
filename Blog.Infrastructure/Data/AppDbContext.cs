@@ -49,4 +49,4 @@ public class AppDbContext: DbContext
 
 
 // dotnet ef migrations add Init --project ..\Blog.Infrastructure\ --startup-project .
-// dotnet ef update --project ..\Blog.Infrastructure\ --startup-project .
+// dotnet ef database update --project ..\Blog.Infrastructure\ --startup-project .

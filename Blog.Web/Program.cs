@@ -1,3 +1,5 @@
+using Blog.Application.Interfaces;
+using Blog.Application.Services;
 using Blog.Domain.Repositories;
 using Blog.Infrastructure.Data;
 using Blog.Infrastructure.Repositories;
@@ -14,6 +16,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
              ?? "Data Source=../Blog.Infrastructure/blog.db";
     options.UseSqlite(cs);
 });
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IBlogPostRepository, BlogRepository>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 
 
 //DI Contains
