@@ -1,0 +1,57 @@
+<!-- Pages/PostDetail.razor -->
+@page "/post/{Id:guid}"
+@inject IBlogService BlogService
+@inject IUserService UserService
+
+<h3>Blog Post</h3>
+
+@if (isDeleted)
+{
+    <p class="text-success">Post deleted. <NavLink href="/" class="btn btn-outline-primary">Return to dashboard</NavLink></p>
+}
+else if (post is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <article>
+        <h4>@post.Title</h4>
+        <p><em>By @post.AuthorName</em></p>
+        <p>
+            <small>
+                Created @post.DateCreated.ToLocalTime()
+                @(post.DateEdited is not null ? $" • Edited {post.DateEdited.Value.ToLocalTime()}" : "")
+            </small>
+        </p>
+        <p>@post.BodyText</p>
+    </article>
+    <div class="mt-3 btn-group">
+        @if (UserService.CurrentUserId == post.AuthorId)
+        {
+            <NavLink class="btn btn-warning" href="/post/edit/@post.Id">Edit</NavLink>
+            <button class="btn btn-danger" @onclick="Delete">Delete</button>
+        }
+        @if (UserService.CurrentUserId.HasValue && UserService.CurrentUserId != post.AuthorId)
+        {
+            <FavoriteButton PostId="@post.Id" />
+        }
+    </div>
+}
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    private BlogPost? post;
+    private bool isDeleted = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        post = await BlogService.GetPostAsync(Id);
+    }
+
+    private async Task Delete()
+    {
+        await BlogService.DeleteAsync(Id);
+        isDeleted = true;
+    }
+}
