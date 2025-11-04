@@ -1,0 +1,46 @@
+﻿@page "/blog-dashboard"
+@using Blog.Application.DTO.BlogPosts
+@using Blog.Application.Interfaces
+@using Blog.Domain.Entities
+@rendermode InteractiveServer
+@inject IBlogService BS
+
+
+
+<PageTitle>Blog Post Dashboard</PageTitle>
+
+
+@if (_result is not null)
+{
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Modified</th>
+        </tr>
+        </thead>
+        @foreach (var b in _result!)
+        {
+            <tr>
+                <td>@b.Title</td>
+                <td>@b.Created</td>
+                <td>@b.Modified</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p> No Blogs have been Created, Please create some Blogs</p>
+}
+
+@code {
+    private List<BlogPost>? _result;
+
+    protected override async void OnInitialized()
+    {
+        _result = await BS.GetAllBlogPostsAsync();
+    }
+
+}

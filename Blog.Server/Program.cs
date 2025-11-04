@@ -1,5 +1,9 @@
+using Blog.Application.Interfaces;
+using Blog.Application.Services;
 using Blog.Domain.Repositories;
+using Blog.Infrastructure.Data;
 using Blog.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,11 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddDbContext<AppDbContext>(opt =>
+{
+    var cs = builder.Configuration.GetSection("Database:ConnectionString").Value
+             ?? "Data Source=../Blog.Infrastructure/blog.db";
+    opt.UseSqlite(cs);
+});
+
 // di containers
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IBlogPostRepository, BlogRepository>();
+builder.Services.AddScoped<IBlogService, BlogService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -19,6 +35,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwaggerUI(opts =>
+    {
+        opts.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        opts.RoutePrefix = string.Empty;
+    });
 }
 
 app.UseHttpsRedirection();
@@ -42,6 +63,16 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+app.UseAuthorization();
+
+app.UseSwagger();
+
+app.UseSwaggerUI();
+
+// app cors to application
+
+app.MapControllers();
 
 app.Run();
 
