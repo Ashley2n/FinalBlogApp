@@ -1,0 +1,55 @@
+<!-- Pages/SignIn.razor -->
+@page "/signin"
+@inject IUserService UserService
+
+<h3>Sign In</h3>
+
+@if (isSignedIn)
+{
+    <p class="text-success">Signed in successfully.</p>
+    <NavLink class="btn btn-outline-primary" href="/">Go to Dashboard</NavLink>
+}
+else
+{
+    <EditForm Model="@model" OnValidSubmit="SignIn">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label>Email</label>
+            <InputText class="form-control" @bind-Value="model.Email" />
+        </div>
+
+        <button class="btn btn-primary" type="submit">Sign in</button>
+
+        @if (signInFailed)
+        {
+            <p class="text-danger mt-2">Sign-in failed. Please check your email.</p>
+        }
+    </EditForm>
+}
+
+@code {
+    private SignInModel model = new();
+    private bool isSignedIn = false;
+    private bool signInFailed = false;
+
+    private async Task SignIn()
+    {
+        var user = await UserService.SignInAsync(model.Email);
+        if (user is not null)
+        {
+            isSignedIn = true;
+            signInFailed = false;
+        }
+        else
+        {
+            signInFailed = true;
+        }
+    }
+
+    private class SignInModel
+    {
+        public string Email { get; set; } = string.Empty;
+    }
+}
