@@ -1,5 +1,9 @@
 <!-- Pages/Dashboard.razor -->
 @page "/"
+
+@using Blog.Domain.Entities
+@using Blog.Application.Interfaces
+
 @inject IBlogService BlogService
 @inject IUserService UserService
 
@@ -21,7 +25,7 @@ else
             <div class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                     <strong>@p.Title</strong><br />
-                    <small>By @p.AuthorName — @p.DateCreated.ToLocalTime().ToString("MMM dd, yyyy")</small>
+                    <small>By @p.Author — @p.Created.ToLocalTime()</small>
                 </div>
                 <div class="btn-group">
                     <NavLink class="btn btn-sm btn-outline-primary" href="/post/@p.Id">View more</NavLink>
@@ -32,7 +36,7 @@ else
 }
 
 <div class="mt-3">
-    <NavLink class="btn btn-success mt-3" href="/post/edit">Create new post</NavLink>
+    <NavLink class="btn btn-success" href="/post/edit">Create new post</NavLink>
 </div>
 
 @code {
@@ -40,7 +44,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        posts = (await BlogService.GetDashboardAsync()).ToList();
+        posts = await BlogService.GetAllBlogPostsAsync();
     }
-
 }
